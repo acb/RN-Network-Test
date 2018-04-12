@@ -1,5 +1,5 @@
 {
-  "name": "networkTest",
+  "name": "networktest",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -9,8 +9,11 @@
   "dependencies": {
     "react": "16.3.1",
     "react-native": "0.55.2",
-    "react-native-network-info": "^3.2.2",
-    "react-native-tcp": "^3.3.0"
+    "react-native-keep-awake": "^3.0.1",
+    "react-native-network-info": "^3.1.0",
+    "react-native-tcp": "^3.3.0",
+    "stream": "0.0.2",
+    "stream-browserify": "^2.0.1"
   },
   "devDependencies": {
     "babel-jest": "22.4.3",

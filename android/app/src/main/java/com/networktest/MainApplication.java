@@ -3,6 +3,9 @@ package com.networktest;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.peel.react.TcpSocketsModule;
+import com.pusherman.networkinfo.RNNetworkInfoPackage;
+import com.corbt.keepawake.KCKeepAwakePackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -22,7 +25,10 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage()
+          new MainReactPackage(),
+            new TcpSocketsModule(),
+            new RNNetworkInfoPackage(),
+            new KCKeepAwakePackage()
       );
     }
 
