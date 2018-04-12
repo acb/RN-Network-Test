@@ -40,7 +40,7 @@ export default class App extends Component {
                 {this.state.server === null && <View>
                     <View style={{height: 50}} />
                     <Text>Enter remote IP address to connect to below</Text>
-                    <TextInput keyboardType='numeric' value={this.state.serverIpAddress} onChangeText={this.onIPEntered} onSubmitEditing={this.enterPressed}/>
+                    <TextInput returnKeyType="done" keyboardType='numeric' value={this.state.serverIpAddress} onChangeText={this.onIPEntered} onSubmitEditing={this.enterPressed}/>
                     {this.state.client === null && <Button title="Start Client" onPress={this.startClient} disabled={this.state.serverIpAddress === ''}/>}
                     {this.state.client !== null && <Button title="Stop Client" onPress={this.stopClient}/>}
                     {this.state.client !== null && <View style={{paddingTop: 10}}><Button title="Send Data Packet" onPress={this.sendClientPacket}/></View>}
