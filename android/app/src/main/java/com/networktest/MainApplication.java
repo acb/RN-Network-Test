@@ -3,6 +3,7 @@ package com.networktest;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.tradle.react.UdpSocketsModule;
 import com.peel.react.TcpSocketsModule;
 import com.pusherman.networkinfo.RNNetworkInfoPackage;
 import com.corbt.keepawake.KCKeepAwakePackage;
@@ -26,6 +27,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new UdpSocketsModule(),
             new TcpSocketsModule(),
             new RNNetworkInfoPackage(),
             new KCKeepAwakePackage()

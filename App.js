@@ -15,13 +15,14 @@ import {
 import { NetworkInfo } from 'react-native-network-info';
 import TCP from 'react-native-tcp';
 import KeepAwake from 'react-native-keep-awake';
+import UDP from 'react-native-udp';
 
 const PORT = 55666;
 
 export default class App extends Component {
     constructor(props) {
         super(props);
-        this.state = {server: null, socket: null, client: null, myIpAddress: '', serverIpAddress: ''}
+        this.state = {server: null, socket: null, client: null, myIpAddress: '', serverIpAddress: '', clients: []}
     }
 
     componentDidMount = () => {
@@ -51,28 +52,44 @@ export default class App extends Component {
     }
 
     startClient = () => {
-        let client = TCP.createConnection({host: this.state.serverIpAddress, port: PORT}, () => {
-            client.write("Initial Client Packet");
+        // let client = TCP.createConnection({host: this.state.serverIpAddress, port: PORT}, () => {
+        //     client.write("Initial Client Packet");
+        // });
+
+        // client.on('data', (data) => {
+        //     console.warn('Client Received data: '+data.toString('ascii'));
+        // });
+
+        // client.on('error', (data) => {
+        //     console.warn('Error on client', data.toString('ascii'));
+        // });
+
+        // this.setState({client});
+
+        let client = UDP.createSocket('udp4');
+        client.bind(PORT);
+        client.once('listening', () => {
+            let msg = new Buffer("INIT");
+            client.send(msg, 0, msg.length, PORT, this.state.serverIpAddress);
         });
 
-        client.on('data', (data) => {
-            console.warn('Client Received data: '+data.toString('ascii'));
-        });
-
-        client.on('error', (data) => {
-            console.warn('Error on client', data.toString('ascii'));
+        client.on('message', (message, rinfo) => {
+            console.warn('Client Received data: '+message);
         });
 
         this.setState({client});
     }
 
     stopClient = () => {
-        this.state.client.end();
+        this.state.client.close();
         this.setState({client: null});
     }
 
     sendClientPacket = () => {
-        this.state.client.write("Packet from client");
+        // this.state.client.write("Packet from client");
+        // let msg = toByteArray("Packet from client")
+        let msg = new Buffer("Packet from client");
+        this.state.client.send(msg, 0, msg.length, PORT, this.state.serverIpAddress);
     }
 
     onIPEntered = (val) => {
@@ -86,18 +103,37 @@ export default class App extends Component {
     startHost = () => {
         KeepAwake.activate();
 
-        let server = TCP.createServer((socket) => {
-            socket.on('data', (data) => {
-                console.warn('Server Received data: '+data.toString('ascii'));
-            });
+        // let server = TCP.createServer((socket) => {
+        //     socket.on('data', (data) => {
+        //         console.warn('Server Received data: '+data.toString('ascii'));
+        //     });
 
-            socket.on('error', (e) => {
-                console.warn('Error on server socket: '+e.toString('ascii'));
-            });
+        //     socket.on('error', (e) => {
+        //         console.warn('Error on server socket: '+e.toString('ascii'));
+        //     });
 
-            this.setState({socket});
+        //     this.setState({socket});
 
-        }).listen({port: PORT}, () => {});
+        // }).listen({port: PORT}, () => {});
+
+        let server = UDP.createSocket('udp4');
+        server.bind(PORT);
+        server.on('message', (message, rinfo) => {
+            console.warn('Server Received data: '+message);
+
+            if(message == "INIT") {
+                let ip = rinfo.address;
+                console.warn('Init received from '+ip);
+                if(this.state.clients.indexOf(ip) === -1) {
+                    let clients = [...this.state.clients];
+                    clients.push(ip);
+                    this.setState({clients});
+                }
+
+                return;
+            }
+
+        });
 
         this.setState({server});
     }
@@ -109,6 +145,10 @@ export default class App extends Component {
     }
 
     sendServerPacket = () => {
-        this.state.socket.write("Packet from server");
+        for(let i = 0; i < this.state.clients.length; i++) {
+            let msg = new Buffer("Packet from server");
+            this.state.server.send(msg, 0, msg.length, PORT, this.state.clients[i]);
+        }
+        // this.state.socket.write("Packet from server");
     }
 }

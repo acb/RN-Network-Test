@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -41,6 +40,7 @@
 		8DD5E5C0ADC84D419BE5C61A /* libTcpSockets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F7112B869754C0F85BC3DD9 /* libTcpSockets.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		F1A70188B95C4F5CA1070C7A /* libKCKeepAwake.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BFC9521A66840C39D13C766 /* libKCKeepAwake.a */; };
+		AE7C3D4120F24BEA89D46CAC /* libUdpSockets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B0CBA3E75F9141238A07C667 /* libUdpSockets.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -373,6 +373,8 @@
 		A27C00B8D92245E5A9F0A1AC /* KCKeepAwake.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = KCKeepAwake.xcodeproj; path = "../node_modules/react-native-keep-awake/ios/KCKeepAwake.xcodeproj"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		ECA11F1A4FF44FD8B6E86983 /* RNNetworkInfo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNNetworkInfo.xcodeproj; path = "../node_modules/react-native-network-info/ios/RNNetworkInfo.xcodeproj"; sourceTree = "<group>"; };
+		96E575E20FFB4325B7138237 /* UdpSockets.xcodeproj */ = {isa = PBXFileReference; name = "UdpSockets.xcodeproj"; path = "../node_modules/react-native-udp/ios/UdpSockets.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		B0CBA3E75F9141238A07C667 /* libUdpSockets.a */ = {isa = PBXFileReference; name = "libUdpSockets.a"; path = "libUdpSockets.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -404,6 +406,7 @@
 				F1A70188B95C4F5CA1070C7A /* libKCKeepAwake.a in Frameworks */,
 				59494EC635294022896A2D94 /* libRNNetworkInfo.a in Frameworks */,
 				8DD5E5C0ADC84D419BE5C61A /* libTcpSockets.a in Frameworks */,
+				AE7C3D4120F24BEA89D46CAC /* libUdpSockets.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -627,6 +630,7 @@
 				A27C00B8D92245E5A9F0A1AC /* KCKeepAwake.xcodeproj */,
 				ECA11F1A4FF44FD8B6E86983 /* RNNetworkInfo.xcodeproj */,
 				6B016D72C31F49CD9C28B21D /* TcpSockets.xcodeproj */,
+				96E575E20FFB4325B7138237 /* UdpSockets.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1284,12 +1288,14 @@
 					"$(SRCROOT)..\node_modules\neact-native-keep-awakeios",
 					"$(SRCROOT)..\node_modules\neact-native-network-infoios",
 					"$(SRCROOT)..\node_modules\neact-native-tcpios/**",
+					"$(SRCROOT)\..\node_modules\react-native-udp\ios/**",
 				);
 				INFOPLIST_FILE = networkTestTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1313,12 +1319,14 @@
 					"$(SRCROOT)..\node_modules\neact-native-keep-awakeios",
 					"$(SRCROOT)..\node_modules\neact-native-network-infoios",
 					"$(SRCROOT)..\node_modules\neact-native-tcpios/**",
+					"$(SRCROOT)\..\node_modules\react-native-udp\ios/**",
 				);
 				INFOPLIST_FILE = networkTestTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1344,6 +1352,7 @@
 					"$(SRCROOT)..\node_modules\neact-native-keep-awakeios",
 					"$(SRCROOT)..\node_modules\neact-native-network-infoios",
 					"$(SRCROOT)..\node_modules\neact-native-tcpios/**",
+					"$(SRCROOT)\..\node_modules\react-native-udp\ios/**",
 				);
 				INFOPLIST_FILE = networkTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1369,6 +1378,7 @@
 					"$(SRCROOT)..\node_modules\neact-native-keep-awakeios",
 					"$(SRCROOT)..\node_modules\neact-native-network-infoios",
 					"$(SRCROOT)..\node_modules\neact-native-tcpios/**",
+					"$(SRCROOT)\..\node_modules\react-native-udp\ios/**",
 				);
 				INFOPLIST_FILE = networkTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1400,11 +1410,13 @@
 					"$(SRCROOT)..\node_modules\neact-native-keep-awakeios",
 					"$(SRCROOT)..\node_modules\neact-native-network-infoios",
 					"$(SRCROOT)..\node_modules\neact-native-tcpios/**",
+					"$(SRCROOT)\..\node_modules\react-native-udp\ios/**",
 				);
 				INFOPLIST_FILE = "networkTest-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1438,11 +1450,13 @@
 					"$(SRCROOT)..\node_modules\neact-native-keep-awakeios",
 					"$(SRCROOT)..\node_modules\neact-native-network-infoios",
 					"$(SRCROOT)..\node_modules\neact-native-tcpios/**",
+					"$(SRCROOT)\..\node_modules\react-native-udp\ios/**",
 				);
 				INFOPLIST_FILE = "networkTest-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1475,11 +1489,13 @@
 					"$(SRCROOT)..\node_modules\neact-native-keep-awakeios",
 					"$(SRCROOT)..\node_modules\neact-native-network-infoios",
 					"$(SRCROOT)..\node_modules\neact-native-tcpios/**",
+					"$(SRCROOT)\..\node_modules\react-native-udp\ios/**",
 				);
 				INFOPLIST_FILE = "networkTest-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1512,11 +1528,13 @@
 					"$(SRCROOT)..\node_modules\neact-native-keep-awakeios",
 					"$(SRCROOT)..\node_modules\neact-native-network-infoios",
 					"$(SRCROOT)..\node_modules\neact-native-tcpios/**",
+					"$(SRCROOT)\..\node_modules\react-native-udp\ios/**",
 				);
 				INFOPLIST_FILE = "networkTest-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
